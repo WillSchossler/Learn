@@ -1,29 +1,33 @@
-"""
-uvicorn main:app --reload
-"""
-import fastapi
+from fastapi import FastAPI
+from pydantic import BaseModel
 
-app = fastapi.FastAPI()
-iden = 5
-todos = [
-    {"id": 1, "description": "correr", "active": True},
-    {"id": 2, "description": "malhar", "active": True},
-    {"id": 3, "description": "viajar", "active": False},
-    {"id": 4, "description": "comprar", "active": True},
+app = FastAPI()
+
+class Todo(BaseModel):
+    texto: str
+    estado: bool = False
+
+
+tarefas = [
+    Todo(texto="Dançar"),
+    Todo(texto="Estudar"),
+    Todo(texto="Trabalhar"),
+    Todo(texto="Dançar"),
+    Todo(texto="Estudar"),
+    Todo(texto="Trabalhar"),
 ]
 
-@app.get("/pegar")
-def pegar(identifica: int=None, ativo: bool=True):
-    for dic in todos:
-        if dic["id"] == identifica and dic["active"] == ativo:
-            return dic
-        
-@app.post("/inserir")
-def inserir(desc: str=None, ativo: bool=True):
-    global iden
-    try:
-        todos.append({"id": iden, "description": desc, "active": ativo})
-        iden += 1
-        return "Enviado com sucesso"
-    except:
-        return "Erro no envio"
+
+@app.get("/")
+def home():
+    return "Bem vindo à página inicial!"
+
+
+@app.get("/tarefa")
+def tarefa(index: int):
+    return tarefas[index]
+
+@app.post("/tarefa")
+def colocar(dado: Todo):
+    tarefas.append(dado)
+    return "Sucesso"
