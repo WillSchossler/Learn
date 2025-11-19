@@ -1,0 +1,29 @@
+--EXPLAIN QUERY PLAN
+
+
+SELECT * FROM clientes
+
+/*
+INSERT INTO clientes (nome, data)
+VALUES ("Sara", "1995-11-03")
+/*
+
+
+/*
+CREATE TABLE IF NOT EXISTS clientes(
+id INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT,
+nome TEXT UNIQUE NOT NULL,
+data TEXT
+)
+*/
+
+
+/*
+ALTER TABLE clientes
+ADD COLUMN teste INTEGER NOT NULL
+*/
+
+/*
+DROP TABLE clientes
+*/
+
