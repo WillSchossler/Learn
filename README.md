@@ -1,1 +1,1 @@
-Projeto apenas para aprender
+Repositório destinado a armazenamento de snippets, implementações de ideias e aprendizado geral.
